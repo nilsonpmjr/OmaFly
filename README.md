@@ -1,20 +1,20 @@
-# FruitFly (Versão Experimental)
+# OmaFly (Experimental Version)
 
 <p align="center">
-  <img src="assets/fly.svg" width="128" alt="FruitFly">
+  <img src="assets/fly.svg" width="128" alt="OmaFly">
 </p>
 
-Mosquinha experimental de desktop para Omarchy/Hyprland, com pixel art 2D e decisões comportamentais produzidas por uma rede neural que incorpora circuitos do FlyWire. A implementação prioriza baixo consumo; o circuito pequeno roda num núcleo nativo compilado para CPU, com prova comparativa na GPU já validada.
+An experimental desktop pet fly for Omarchy/Hyprland, featuring 2D pixel art and behavioral decisions driven by a neural network incorporating circuits from FlyWire. The implementation prioritizes low power consumption; the small circuit runs on a compiled native CPU core, with a validated comparative proof on the GPU.
 
-## Status Atual
-O projeto encontra-se atualmente na fase de protótipo de viabilidade (V0.2). 
-- **O que já funciona:** Há um protótipo de fuga e exploração (com rede neural funcional), interface visual em PySide6/QML, controle por ícone na bandeja do sistema (systray) e núcleo C++ otimizado (baixo impacto na CPU). Existe também uma prova de conceito funcional de oclusão visual (esconder-se atrás de janelas).
-- **O que falta:** O catálogo completo das 10 respostas comportamentais, integração da detecção de abrigos nas decisões neurais da mosca e a instalação automática/empacotamento como plugin nativo no Omarchy.
+## Current Status
+The project is currently in the feasibility prototype phase (V0.2).
+- **What's working:** An escape and exploration prototype (with a functional neural network), a visual interface in PySide6/QML, a system tray icon control, and an optimized C++ core (low CPU impact). There is also a functional proof-of-concept for visual occlusion (hiding behind windows).
+- **What's missing:** The full catalog of 10 behavioral responses, integration of shelter detection into the fly's neural decisions, and automatic installation/packaging as a native plugin for Omarchy.
 
-## Visão Futura
-O plano para a versão de lançamento (M3/V1.0) engloba testar e integrar todas as 10 respostas simultaneamente. Após a V1, há expansões planejadas (P2) que incluem novas respostas a ameaças visuais e CO2 virtual, rastreabilidade precisa com o banco de dados (BANC/FlyWire) e um sistema aprimorado de persistência neural entre inicializações.
+## Future Vision
+The plan for the release version (M3/V1.0) involves testing and integrating all 10 responses simultaneously. Post-V1, there are planned expansions (P2) that include new responses to visual threats and virtual CO2, precise traceability with the database (BANC/FlyWire), and an improved system for neural persistence between startups.
 
-Para preparar e executar no checkout:
+To prepare and run from checkout:
 
 ```sh
 python tools/build.py
@@ -23,14 +23,14 @@ python tools/extract.py
 ./run.sh run
 ```
 
-O comando abre somente o ícone; ligue a mosca pelo menu ou com `./run.sh enable`. `./run.sh disable` suspende a simulação e remove a sobreposição; `./run.sh quit` encerra a instância. Consulte [execução, testes e limites](docs/IMPLEMENTATION.md).
+The command opens only the tray icon; turn on the fly via the menu or with `./run.sh enable`. `./run.sh disable` suspends the simulation and removes the overlay; `./run.sh quit` terminates the instance. See [execution, tests, and limits](docs/IMPLEMENTATION.md).
 
-| Documento | Uso |
+| Document | Usage |
 |---|---|
-| [PRD](docs/PRD.md) | Experiência, requisitos, dez respostas comportamentais e prioridades de produto. |
-| [Especificação técnica](docs/SPEC.md) | Arquitetura proposta, contratos e provas de viabilidade; entrega de `/to-spec`. |
-| [TODO e tickets](docs/TODO.md) | Trabalho ordenado, dependências e critérios de aceite; entrega de `/to-tickets`. |
-| [Evidências e limites](docs/RESEARCH.md) | Inspeção local, fontes consultadas e questões ainda sem confirmação. |
-| [Implementação](docs/IMPLEMENTATION.md) | Como executar, proteções de consumo e o que ainda falta. |
+| [PRD](docs/PRD.md) | Experience, requirements, ten behavioral responses, and product priorities. |
+| [Technical Spec](docs/SPEC.md) | Proposed architecture, contracts, and feasibility proofs; `/to-spec` delivery. |
+| [TODO and Tickets](docs/TODO.md) | Ordered work, dependencies, and acceptance criteria; `/to-tickets` delivery. |
+| [Evidence and Limits](docs/RESEARCH.md) | Local inspection, consulted sources, and unconfirmed questions. |
+| [Implementation](docs/IMPLEMENTATION.md) | How to run, resource consumption limits, and what is still missing. |
 
-Os comandos `/to-spec` e `/to-tickets` foram interpretados como entregáveis documentais locais. Não houve publicação de tickets em um serviço externo.
+The `/to-spec` and `/to-tickets` commands were interpreted as local document deliverables. No tickets were published to an external service.
