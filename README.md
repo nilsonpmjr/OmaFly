@@ -4,7 +4,9 @@
   <img src="assets/fly.svg" width="128" alt="OmaFly">
 </p>
 
-An experimental desktop pet fly for Omarchy/Hyprland, featuring 2D pixel art and behavioral decisions driven by a neural network incorporating circuits from FlyWire. The implementation prioritizes low power consumption; the small circuit runs on a compiled native CPU core, with a validated comparative proof on the GPU.
+```This is just another AI generated thing on top of others work I do not intend to gain credit over.```
+
+With that stated: An experimental desktop pet fly for Omarchy/Hyprland, featuring 2D pixel art and behavioral decisions driven by a neural network incorporating circuits from FlyWire. The implementation prioritizes low power consumption; the small circuit runs on a compiled native CPU core, with a validated comparative proof on the GPU.
 
 ## Current Status
 The project is currently in the feasibility prototype phase (V0.2).
