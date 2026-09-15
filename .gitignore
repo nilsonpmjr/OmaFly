@@ -7,4 +7,5 @@ reports/*.log
 *.csv.gz
 *.zip
 *.csv/
+wanting-list.md
 

@@ -41,7 +41,7 @@ ShellRoot {
             WlrLayershell.namespace: "fruitfly"
             WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
             mask: Region {}
-            Sprite {
+            FlySprite {
                 anchors.fill: parent
                 frame: root.frame
                 assetsPath: Quickshell.env("FRUITFLY_ASSETS")

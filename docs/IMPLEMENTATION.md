@@ -12,6 +12,12 @@ A exploração anterior perdia a oscilação e podia ficar presa em cantos com c
 
 `tests/test_behavior.py` verifica exploração em janelas sucessivas de 30 segundos, durante três minutos simulados por cenário, com duas sementes/frequências e partidas no centro e em cantos. Também compara a mesma cena com e sem entradas da fibra gigante: a ablação elimina o comando de voo. Isso demonstra influência causal no protótipo, sem validar biologicamente seus parâmetros. `./run.sh status` expõe modo corporal, velocidade, giro, ativação de voo e taxa da fibra gigante na telemetria já existente.
 
+## Base de ocultação por janela
+
+O desenho aceita agora uma lista `clips` de até quatro retângulos locais. Ausência desse campo mantém a mosca exposta; uma lista vazia oculta o desenho inteiro. `occlusion.py` calcula a geometria a partir de um abrigo explícito, e `FlySprite.qml` aplica o recorte separado da máscara de input. O worker normal ainda não seleciona abrigos nem consulta janelas.
+
+A prova `python tools/probe_occlusion.py` abre e manipula somente uma janela própria, usa o componente visual de produção e encerra sua instância temporária ao terminar. Oito etapas passaram com comparação de alfa pixel a pixel, incluindo movimento, redimensionamento, mudança de workspace e fechamento. As posições dessa prova são roteirizadas; a seleção e a entrada neural serão integradas depois. Resultados e limites estão em [OCCLUSION.md](../reports/OCCLUSION.md).
+
 ## Mudança de prioridade
 
 O pedido mais recente coloca baixo consumo e funcionamento em outros dispositivos acima da preferência anterior pela GPU. A implementação mantém uma referência compilada para CPU e uma prova GPU comparável. O backend padrão do protótipo é CPU; nenhuma biblioteca ROCm, CUDA ou de treinamento é carregada durante seu uso normal.
@@ -85,6 +91,6 @@ O alvo `gfx1102` é específico da máquina inspecionada; outros dispositivos ex
 
 As saídas dos cinco neurônios sem neurotransmissor definido têm eficácia zero, com a anatomia preservada no manifesto. O modelo assume sinais simplificados para os demais neurotransmissores, campos receptivos sintéticos e dinâmica LIF normalizada. Essas hipóteses não foram calibradas contra comportamento biológico.
 
-Ainda faltam os dez comportamentos completos, oclusão por janelas, persistência entre execuções, reconexão ao tray após falha do host, suspensão por bloqueio da sessão e migração entre monitores sem contenção na borda. Os estados de erro são visíveis no tooltip e na CLI. Esta versão não deve ser instalada como serviço permanente até esses casos serem verificados.
+Ainda faltam os dez comportamentos completos, integração neural da oclusão por janelas, persistência entre execuções, reconexão ao tray após falha do host, suspensão por bloqueio da sessão e migração entre monitores sem contenção na borda. Os estados de erro são visíveis no tooltip e na CLI. Esta versão não deve ser instalada como serviço permanente até esses casos serem verificados.
 
 Os relatórios JSON em `reports/` guardam medições reproduzíveis. RSS soma páginas compartilhadas entre processos; PSS, quando disponível, ajuda a estimar o custo efetivo. As amostras de potência são da placa inteira, também usada pelo desktop e por outros aplicativos. Elas não permitem atribuir uma diferença de watts exclusivamente à mosca.

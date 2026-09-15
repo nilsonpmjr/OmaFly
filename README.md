@@ -1,8 +1,18 @@
-# FruitFly
+# FruitFly (Versão Experimental)
 
-Mosquinha experimental de desktop para Omarchy/Hyprland, com pixel art 2D e decisões comportamentais produzidas por uma rede neural que incorpora circuitos do FlyWire. A implementação prioriza baixo consumo; o circuito pequeno roda na CPU compilada e há uma prova comparativa na GPU.
+<p align="center">
+  <img src="assets/fly.svg" width="128" alt="FruitFly">
+</p>
 
-Já existe um protótipo de fuga/exploração com ícone no systray e liga/desliga. Os dez comportamentos completos, os esconderijos e a instalação como plugin ainda não estão concluídos.
+Mosquinha experimental de desktop para Omarchy/Hyprland, com pixel art 2D e decisões comportamentais produzidas por uma rede neural que incorpora circuitos do FlyWire. A implementação prioriza baixo consumo; o circuito pequeno roda num núcleo nativo compilado para CPU, com prova comparativa na GPU já validada.
+
+## Status Atual
+O projeto encontra-se atualmente na fase de protótipo de viabilidade (V0.2). 
+- **O que já funciona:** Há um protótipo de fuga e exploração (com rede neural funcional), interface visual em PySide6/QML, controle por ícone na bandeja do sistema (systray) e núcleo C++ otimizado (baixo impacto na CPU). Existe também uma prova de conceito funcional de oclusão visual (esconder-se atrás de janelas).
+- **O que falta:** O catálogo completo das 10 respostas comportamentais, integração da detecção de abrigos nas decisões neurais da mosca e a instalação automática/empacotamento como plugin nativo no Omarchy.
+
+## Visão Futura
+O plano para a versão de lançamento (M3/V1.0) engloba testar e integrar todas as 10 respostas simultaneamente. Após a V1, há expansões planejadas (P2) que incluem novas respostas a ameaças visuais e CO2 virtual, rastreabilidade precisa com o banco de dados (BANC/FlyWire) e um sistema aprimorado de persistência neural entre inicializações.
 
 Para preparar e executar no checkout:
 

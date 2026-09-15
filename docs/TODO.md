@@ -4,7 +4,7 @@ Entrega de `/to-tickets`, atualizada em 14 de setembro de 2026. Existe um protó
 
 FF-001, FF-002, FF-003, FF-005, FF-006, FF-008–FF-012, FF-014 e FF-033 têm implementação ou evidência parcial. Permanecem abertos até atenderem a todos os respectivos critérios. O requisito posterior de baixo consumo substitui a GPU obrigatória por comparação de backends e acrescenta F14.
 
-Nesta iteração, FF-006, FF-012, FF-014, FF-019 e FF-026 ganharam evidências adicionais: SVG sugerido integrado, animação ligada ao comando de voo, exploração sem bloqueio nos cantos dos cenários automatizados e ablação no ciclo cérebro–corpo. São 15 testes aprovados; esses tickets permanecem abertos para os demais critérios de aceite.
+Nesta iteração, FF-006, FF-012, FF-014, FF-019 e FF-026 ganharam evidências adicionais: SVG sugerido integrado, animação ligada ao comando de voo, exploração sem bloqueio nos cantos dos cenários automatizados e ablação no ciclo cérebro–corpo. Com a prova de ocultação, são 17 testes aprovados; esses tickets permanecem abertos para os demais critérios de aceite.
 
 O [PRD](PRD.md) define o resultado e a [especificação](SPEC.md) define os contratos propostos. Os identificadores F e R abaixo apontam para requisitos e respostas do PRD.
 
@@ -50,6 +50,8 @@ O número FF-033 foi acrescentado quando o usuário autorizou o uso da GPU; sua 
 - [ ] **P0 · M · Dependências: FF-002 · Requisitos: F05, F08.** Recortar um sprite de teste na borda de uma janela opaca, mantendo o overlay na camada superior.
 
 **Aceite:** ocultação parcial e total, seguida de reaparecimento; mover, redimensionar, fechar e trocar workspace não deixa resíduos. Registrar atraso, limitações de cantos/transparência e regra para janelas sobrepostas. Demonstrar separadamente que a máscara de input não é o mecanismo de recorte visual.
+
+**Progresso de FF-004:** a prova com janela própria passou em oito etapas no compositor real, com comparação pixel a pixel: exposição, recorte parcial/total, movimento, redimensionamento, saída/retorno de workspace e fechamento. O componente está no desenho de produção; a escolha de abrigo permanece apenas roteirizada na prova. Faltam atraso durante arraste e casos de sobreposição/transparência. Evidências em [OCCLUSION.md](../reports/OCCLUSION.md).
 
 ### FF-005: auditar dados e extrair candidato de fuga
 

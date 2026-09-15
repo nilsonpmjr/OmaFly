@@ -39,7 +39,7 @@ class Hyprland:
         pos=self.query("cursorpos")
         return float(pos["x"]),float(pos["y"])
 
-    def windows(self):
+    def windows(self,include_hidden=False):
         """Opt-in geometry snapshot. Never retain titles, classes or contents.
 
         These rectangles are not a guarantee of opacity or stacking order.
@@ -48,4 +48,4 @@ class Hyprland:
         return [{"id":w["address"],"pid":w.get("pid"),
                  "rect":(*w["at"],*w["size"]),"workspace":w["workspace"]["id"],
                  "pinned":w.get("pinned",False)}
-                for w in self.query("clients") if w.get("mapped") and not w.get("hidden")]
+                for w in self.query("clients") if w.get("mapped") and (include_hidden or not w.get("hidden"))]
