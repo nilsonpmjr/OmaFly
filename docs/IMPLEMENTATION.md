@@ -24,6 +24,12 @@ Para experimentar, deixe uma borda de janela acessível e acompanhe a mosca com 
 
 A prova `python tools/probe_occlusion.py --neural` executa o ciclo em uma janela real pertencente ao teste, com um cursor sintético que não move o ponteiro do usuário. A variante sem `--neural` preserva a prova geométrica anterior. As duas encerram seus próprios processos. Resultados, limitações e evidência de ablação estão em [NEURAL-SHELTER.md](../reports/NEURAL-SHELTER.md).
 
+## Renderização por software
+
+A sobreposição usa `QT_QUICK_BACKEND=software`, configurado somente no seu processo. O status informa `renderer: software`. A comparação atual reduziu a memória proporcional total de aproximadamente 181 para 126 MiB; os dois modos reportaram perto de 6 W na placa inteira. O pico antigo de 17–18 W não foi reproduzido e sua causa permanece sem confirmação.
+
+Para diagnosticar incompatibilidade, encerre a instância e execute `FRUITFLY_RENDERER=rhi ./run.sh run`. A variável é lida ao criar uma instância; invocar `run` com outra já aberta não troca o backend. Sem essa variável, software é o padrão. Os recortes e o ciclo de abrigo passaram novamente nesse modo. [Medições, reprodução e limites](../reports/RENDER-POWER.md).
+
 ## Mudança de prioridade
 
 O pedido mais recente coloca baixo consumo e funcionamento em outros dispositivos acima da preferência anterior pela GPU. A implementação mantém uma referência compilada para CPU e uma prova GPU comparável. O backend padrão do protótipo é CPU; nenhuma biblioteca ROCm, CUDA ou de treinamento é carregada durante seu uso normal.

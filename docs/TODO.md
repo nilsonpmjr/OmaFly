@@ -75,7 +75,7 @@ O número FF-033 foi acrescentado quando o usuário autorizou o uso da GPU; sua 
 
 **Aceite:** teste prolongado ativo, repouso neural e desligado; orçamento de CPU documentado, nenhuma recuperação em rajada e redução de redesenhos. Medir custo adicional no compositor e em um dispositivo menos potente. O teste curto já confirma suspensão dos contadores e descanso sob atraso simulado; ele não fecha sozinho este ticket.
 
-**Progresso de FF-034 em 15/09:** caminhada limitada a dez redesenhos/s preserva a frequência neural. A rodada final mediu 1,37% de um núcleo, mas a placa inteira passou de cerca de 5 W desligada para 17–18 W ativa, mesmo após o limite visual. Investigar composição/clock e alternativas de apresentação é a próxima prioridade de consumo; não declarar o orçamento energético atendido. Evidências em [NEURAL-SHELTER.md](../reports/NEURAL-SHELTER.md).
+**Progresso de FF-034 em 15/09:** a comparação em duas ordens separou desenho, coleta e custo de CPU do compositor. O padrão por software reduziu PSS total de aproximadamente 181 para 126 MiB, preservando 27 testes e as provas gráficas. Ambos os renderizadores marcaram cerca de 6 W ativos na comparação atual; o pico antigo de 17–18 W não foi reproduzido e não tem causa confirmada. Permanecem pendentes uso prolongado, outras máquinas, carga gráfica, bateria e pior caso de abrigos. Evidências em [RENDER-POWER.md](../reports/RENDER-POWER.md).
 
 ### FF-006: provar controle neural e estratégia de ajuste
 

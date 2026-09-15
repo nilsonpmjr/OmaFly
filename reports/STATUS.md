@@ -2,13 +2,21 @@
 
 Em 14 de setembro de 2026 foi implementada uma versão experimental com núcleo neural, sprite frontolateral, systray e controle por CLI. Ela roda a partir do checkout e começa desligada. O teste gráfico encerrou sua própria instância ao terminar; nenhum autostart ou arquivo de configuração do Omarchy foi instalado.
 
-## Etapa atual: abrigo neural, 15/09
+## Etapa atual: renderização mais leve
+
+O padrão do overlay passou para software, com alternativa explícita `FRUITFLY_RENDERER=rhi`. A comparação isolou desenho e consultas ao Hyprland em duas ordens, medindo também CPU do compositor. Os 27 testes e as provas de recorte/abrigo passaram com o novo backend.
+
+No aplicativo completo, a memória proporcional caiu de cerca de **181 para 126 MiB**; a rodada por software usou **1,37% de um núcleo de CPU** e **224 MiB de RSS somada**. Desligado: contadores estáveis, socket de eventos fechado e nenhum incremento de CPU detectado na janela curta.
+
+Os dois backends marcaram **6 W para a placa inteira durante a comparação atual**, com base perto de 5 W desligada. O salto antigo para 18 W não foi reproduzido e não deve ser atribuído ao pet como causa já comprovada. A troca tem ganho de memória verificado, mas não demonstra economia de 12 W. A matriz prolongada de consumo permanece aberta. [Relatório completo](RENDER-POWER.md).
+
+## Etapa de abrigo neural, 15/09 (anterior)
 
 Seleção recorrente de entradas, contato por cruzamento, ocultação e retorno foram integrados ao worker. Passaram **27 testes**, incluindo quatro bordas, duas frequências, múltiplas janelas, geometria alterada, históricos diferentes, ablação seletiva e pausa sem socket de eventos. A prova com uma janela real e cursor sintético completou entrada, ocultação total e reaparecimento. Evidências em [NEURAL-SHELTER.md](NEURAL-SHELTER.md).
 
 A coleta agrupa eventos, faz snapshots de segurança a cada dois segundos e acompanha mudanças/abrigo em até cinco snapshots por segundo. A caminhada usa até dez redesenhos por segundo; o controle neural permanece em até 25 Hz. Ocultação total remove a superfície visível e interrompe quadros repetidos, mantendo a rede ativa.
 
-Na medição final de caminhada exposta: **1,37% de um núcleo**, **185 MiB de PSS**, contadores estáveis ao desligar e socket de eventos fechado. A placa inteira marcou **17–18 W ativa e cerca de 5 W desligada**, diferença também observada na rodada anterior. A limitação de quadros não resolveu o custo gráfico; sua investigação permanece prioritária em FF-034. O teste curto não isola a energia do pet nem valida o pior caso de seleção. `desktop-smoke.json` contém esta rodada; `desktop-before-frame-gate.json` preserva a anterior.
+Na medição final de caminhada exposta: **1,37% de um núcleo**, **185 MiB de PSS**, contadores estáveis ao desligar e socket de eventos fechado. A placa inteira marcou **17–18 W ativa e cerca de 5 W desligada**, diferença também observada na rodada anterior. A limitação de quadros não resolveu o custo gráfico; sua investigação permanece prioritária em FF-034. O teste curto não isola a energia do pet nem valida o pior caso de seleção. Essa rodada antiga foi preservada em `desktop-before-software.json`; `desktop-smoke.json` contém o teste atual por software.
 
 Os critérios completos de FF-023/FF-024 continuam abertos: calibração, contextos mais variados e matriz gráfica. Dez respostas, passagem entre monitores e release empacotado permanecem pendentes.
 

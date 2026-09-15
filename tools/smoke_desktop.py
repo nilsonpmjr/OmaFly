@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Bounded visible smoke test: off -> on -> off; always closes its own instance."""
+import argparse
 import json
 import os
 from pathlib import Path
@@ -51,14 +52,20 @@ def sample(pid,seconds):
 
 
 def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--renderer',choices=('software','rhi'))
+    args=parser.parse_args()
+    report_name='desktop-smoke'+('-'+args.renderer if args.renderer else '')
     try:
         request("status")
         raise SystemExit("An instance already exists; smoke test will not change it")
     except (OSError,RuntimeError):pass
     (ROOT/"reports").mkdir(exist_ok=True)
     report={"scope":"alpha runtime including supervisor/worker/overlay; GPU power is whole-board, not isolated pet power"}
-    with (ROOT/"reports/desktop-smoke.log").open("w") as log:
-        process=subprocess.Popen([str(ROOT/"run.sh"),"run"],stdout=log,stderr=log)
+    env=dict(os.environ)
+    if args.renderer:env['FRUITFLY_RENDERER']=args.renderer
+    with (ROOT/"reports"/(report_name+".log")).open("w") as log:
+        process=subprocess.Popen([str(ROOT/"run.sh"),"run"],stdout=log,stderr=log,env=env)
         try:
             for _ in range(60):
                 if process.poll() is not None:raise RuntimeError("App exited during startup; see log")
@@ -94,7 +101,7 @@ def main():
                 try:process.wait(timeout=4)
                 except subprocess.TimeoutExpired:process.kill();process.wait()
             report["exit_code"]=process.returncode
-            (ROOT/"reports/desktop-smoke.json").write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n")
+            (ROOT/"reports"/(report_name+".json")).write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n")
     print(json.dumps(report,indent=2,ensure_ascii=False))
     return 1 if "error" in report else 0
 

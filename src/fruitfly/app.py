@@ -17,9 +17,10 @@ from .__main__ import socket_path,request
 
 
 class Supervisor(QObject):
-    def __init__(self,app):
+    def __init__(self,app,renderer="software"):
         super().__init__();self.app=app;self.enabled=False;self.error=None
-        self.metrics={"ticks":0,"queries":0,"backend":"native-cpu"}
+        self.renderer=renderer
+        self.metrics={"ticks":0,"queries":0,"backend":"native-cpu","renderer":renderer}
         self.clients={};self.viewers=set();self.last_frame={"visible":False}
         self.worker_buffer=b"";self.closing=False;self.worker_ready=False
         self.dir=socket_path().parent
@@ -92,6 +93,9 @@ class Supervisor(QObject):
                 self.worker.start(sys.executable,["-m","fruitfly.worker"])
             else:self.send_worker("enable")
             if self.overlay.state()==QProcess.ProcessState.NotRunning:
+                # A 64x64 image with rectangular clips needs no 3D scene graph.
+                # Scope this to our overlay; do not change the desktop's renderer.
+                env.insert("QT_QUICK_BACKEND",self.renderer)
                 env.insert("FRUITFLY_SOCKET",str(socket_path()))
                 env.insert("FRUITFLY_ASSETS",str(ROOT/"assets"))
                 self.overlay.setProcessEnvironment(env)
@@ -193,13 +197,16 @@ def run():
     try:
         print(json.dumps(request("status"),ensure_ascii=False));return 0
     except (OSError,RuntimeError):pass
+    renderer=os.environ.get("FRUITFLY_RENDERER","software")
+    if renderer not in {"software","rhi"}:
+        print("FRUITFLY_RENDERER deve ser software ou rhi",file=sys.stderr);return 2
     # Only remove a stale socket after a failed connection in our private runtime directory.
     path=socket_path()
     if path.exists() and path.is_socket() and path.stat().st_uid==os.getuid():
         QLocalServer.removeServer(str(path))
     app=QApplication([sys.argv[0]])
     app.setApplicationName("FruitFly");app.setQuitOnLastWindowClosed(False)
-    supervisor=Supervisor(app)
+    supervisor=Supervisor(app,renderer)
     if not QSystemTrayIcon.isSystemTrayAvailable():
         supervisor.error="Bandeja indisponível; controle por CLI";supervisor.refresh_tray()
     return app.exec()

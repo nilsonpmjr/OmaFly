@@ -125,6 +125,8 @@ Para a versão 1, a oclusão considera a janela-abrigo selecionada. Pilhas compl
 
 ### Recorte implementado em 15/09/2026
 
+A sobreposição utiliza a adaptação `software` do Qt Quick por padrão, sem mudar o compositor. `FRUITFLY_RENDERER=rhi` permite uma comparação ou diagnóstico após encerrar a instância. A escolha aparece na telemetria como `renderer`; somente `software` e `rhi` são aceitos. Não há fallback automático para aceleração gráfica. [Evidência da escolha](../reports/RENDER-POWER.md).
+
 O runtime usa até oito janelas por monitor/workspace e quatro entradas por janela, com dimensões mínimas de 128 × 128 pixels e espaço alcançável dos dois lados. A rede recorrente de abrigo está em `shelter_network.py`; o contato geométrico em `shelter.py`. Os campos `shelter`, `enter` e `exit` ampliam o comando motor. O sprite só assume o abrigo ao cruzar sua borda frontal de 32 pixels com ativação de entrada acima de 0,5. A posição acompanha a translação da janela; remover sua entrada encerra o contato.
 
 A referência é retangular, sem resolver transparência ou pilhas arbitrárias. O cache agrega eventos do socket2, faz atualização de segurança a cada dois segundos e limita acompanhamento/mudanças a cinco snapshots por segundo. Cada snapshot lê janelas e monitores. `FrameGate` limita caminhada a 10 Hz e voo a 25 Hz, com prioridade para mudanças de visibilidade e fase motora, preservando a frequência neural. Ocultação total retira a superfície visível e suspende snapshots repetidos. A supervisão recebe telemetria aproximadamente uma vez por segundo, inclusive em repouso.

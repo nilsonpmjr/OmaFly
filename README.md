@@ -11,7 +11,7 @@ The project is currently in the feasibility prototype phase (V0.2).
 - **What's working:** An escape and exploration prototype (with a functional neural network), a visual interface in PySide6/QML, a system tray icon control, and an optimized C++ core (low CPU impact). Neural shelter selection, physical entry, occlusion, and return are integrated; 27 automated tests and a real-window neural probe pass.
 - **What's missing:** The full catalog of 10 behavioral responses, broader shelter calibration and desktop validation, and automatic installation/packaging as a native plugin for Omarchy.
 
-The latest short run used about 1.4% of one CPU core, but whole-board GPU power increased from roughly 5 W while disabled to 17–18 W while visible. The rendering energy cost remains an open priority; low CPU use alone does not establish low overall power. See [neural shelter results and limits](reports/NEURAL-SHELTER.md).
+The overlay now uses Qt Quick's software renderer by default. In the latest short comparison, total proportional memory fell from about 181 MiB to 126 MiB, with about 1.4% of one CPU core. Both renderers measured roughly 6 W for the whole GPU while active; the earlier 17–18 W observation was not reproduced, so its cause remains unconfirmed. See [renderer measurements and limits](reports/RENDER-POWER.md).
 
 ## Future Vision
 The plan for the release version (M3/V1.0) involves testing and integrating all 10 responses simultaneously. Post-V1, there are planned expansions (P2) that include new responses to visual threats and virtual CO2, precise traceability with the database (BANC/FlyWire), and an improved system for neural persistence between startups.
