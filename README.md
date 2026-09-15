@@ -14,6 +14,16 @@ The project is currently in the feasibility prototype phase (V0.2).
 ## Future Vision
 The plan for the release version (M3/V1.0) involves testing and integrating all 10 responses simultaneously. Post-V1, there are planned expansions (P2) that include new responses to visual threats and virtual CO2, precise traceability with the database (BANC/FlyWire), and an improved system for neural persistence between startups.
 
+## Data Requirements
+Due to their large size, the connectome data files are not included in this repository. Before building, you must download the FlyWire FAFB v783 dataset files and place them in the root directory:
+- `fafb-consolidated_cell_types.csv.gz`
+- `fafb-classification.csv.gz`
+- `fafb-neurons.csv.gz`
+- `fafb-connections_princeton.csv.gz`
+
+*(Note: The large `fafb-sk_lod1_783_healed.zip` file containing 3D skeletons is only used for offline anatomical analysis and is not required to run the desktop pet).*
+
+## Preparation and Execution
 To prepare and run from checkout:
 
 ```sh
