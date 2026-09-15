@@ -1,0 +1,344 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="100%" height="100%" 
+     style="image-rendering: pixelated; shape-rendering: crispEdges;">
+  <!-- ==========================================
+       FLYWIRE COMPANION - METALLIC CHITIN FLY
+       Canvas: 48x48 Pixel Grid (Trimetric View)
+       ========================================== -->
+
+  <!-- 1. SOMBRA PROJETADA NO CHÃO (Profundidade Trimétrica) -->
+  <g id="ground-shadow" fill="#0d1117" opacity="0.35">
+    <rect x="18" y="38" width="17" height="1"/>
+    <rect x="15" y="39" width="23" height="1"/>
+    <rect x="14" y="40" width="25" height="1"/>
+    <rect x="15" y="41" width="22" height="1"/>
+    <rect x="18" y="42" width="16" height="1"/>
+    <rect x="22" y="43" width="9" height="1"/>
+  </g>
+
+  <!-- 2. PATAS POSTERIORES / DISTAIS (Lado Esquerdo / Fundo) -->
+  <g id="legs-far">
+    <!-- Pata Anterior Esquerda -->
+    <g fill="#141922">
+      <rect x="15" y="27" width="1" height="2"/>
+      <rect x="14" y="29" width="1" height="2"/>
+      <rect x="13" y="31" width="1" height="2"/>
+      <rect x="12" y="33" width="1" height="3"/>
+      <rect x="13" y="36" width="2" height="1"/>
+    </g>
+    <!-- Pata Média Esquerda -->
+    <g fill="#10151c">
+      <rect x="22" y="27" width="2" height="1"/>
+      <rect x="21" y="28" width="1" height="2"/>
+      <rect x="20" y="30" width="1" height="3"/>
+      <rect x="19" y="33" width="1" height="3"/>
+      <rect x="18" y="36" width="1" height="3"/>
+      <rect x="19" y="39" width="2" height="1"/>
+    </g>
+    <!-- Pata Traseira Esquerda -->
+    <g fill="#0b0f14">
+      <rect x="28" y="27" width="1" height="2"/>
+      <rect x="27" y="29" width="1" height="3"/>
+      <rect x="26" y="32" width="1" height="3"/>
+      <rect x="25" y="35" width="1" height="4"/>
+      <rect x="26" y="39" width="2" height="1"/>
+    </g>
+  </g>
+
+  <!-- 3. ASA DISTAL (Asa Esquerda estendida em perspectiva) -->
+  <g id="wing-far">
+    <!-- Membrana Translúcida Cinza-Gelo / Petróleo -->
+    <g fill="#a5d8ea" opacity="0.35">
+      <rect x="31" y="8" width="2" height="1"/>
+      <rect x="29" y="9" width="6" height="1"/>
+      <rect x="28" y="10" width="8" height="1"/>
+      <rect x="27" y="11" width="10" height="1"/>
+      <rect x="26" y="12" width="11" height="1"/>
+      <rect x="25" y="13" width="11" height="1"/>
+      <rect x="25" y="14" width="10" height="1"/>
+      <rect x="25" y="15" width="8" height="1"/>
+      <rect x="24" y="16" width="7" height="1"/>
+      <rect x="24" y="17" width="5" height="1"/>
+    </g>
+    <!-- Nervuras da Asa Distal -->
+    <g fill="#375569" opacity="0.75">
+      <rect x="30" y="8" width="3" height="1"/>
+      <rect x="28" y="9" width="2" height="1"/>
+      <rect x="34" y="9" width="2" height="1"/>
+      <rect x="27" y="10" width="1" height="1"/>
+      <rect x="31" y="10" width="1" height="3"/>
+      <rect x="36" y="10" width="1" height="2"/>
+      <rect x="26" y="11" width="1" height="2"/>
+      <rect x="29" y="12" width="1" height="4"/>
+      <rect x="34" y="13" width="2" height="1"/>
+      <rect x="25" y="16" width="1" height="2"/>
+    </g>
+    <!-- Brilho na Borda Superior -->
+    <g fill="#e8f7fc" opacity="0.8">
+      <rect x="29" y="9" width="2" height="1"/>
+      <rect x="31" y="8" width="2" height="1"/>
+      <rect x="33" y="9" width="2" height="1"/>
+    </g>
+  </g>
+
+  <!-- 4. ABDÔMEN (Segmentado em Cinza-Chumbo / Grafite Metálico) -->
+  <g id="abdomen">
+    <!-- Contorno e Sombra Inferior (Obsidiana) -->
+    <g fill="#0e131a">
+      <rect x="30" y="21" width="12" height="7"/>
+      <rect x="33" y="28" width="8" height="1"/>
+      <rect x="36" y="29" width="4" height="1"/>
+      <rect x="42" y="24" width="2" height="3"/>
+    </g>
+    <!-- Placas de Quitina Cinza-Ardósia / Chumbo -->
+    <g fill="#333f4f">
+      <rect x="30" y="22" width="3" height="5"/>
+      <rect x="34" y="22" width="3" height="5"/>
+      <rect x="38" y="23" width="2" height="4"/>
+    </g>
+    <!-- Brilho Metálico Dorsal (Reflexo Especular Frio) -->
+    <g fill="#6c7d93">
+      <rect x="30" y="21" width="3" height="1"/>
+      <rect x="34" y="21" width="3" height="1"/>
+      <rect x="38" y="22" width="2" height="1"/>
+      <rect x="30" y="22" width="1" height="2"/>
+      <rect x="34" y="22" width="1" height="2"/>
+    </g>
+    <g fill="#9cb2c9">
+      <rect x="31" y="21" width="1" height="1"/>
+      <rect x="35" y="21" width="1" height="1"/>
+    </g>
+    <!-- Incisões / Sulcos Intersegmentares Pretos -->
+    <g fill="#171d26">
+      <rect x="33" y="21" width="1" height="6"/>
+      <rect x="37" y="21" width="1" height="6"/>
+      <rect x="40" y="22" width="2" height="5"/>
+      <rect x="42" y="24" width="1" height="3"/>
+    </g>
+    <!-- Ápice Terminal Melanizado -->
+    <rect x="41" y="25" width="2" height="2" fill="#080b0f"/>
+  </g>
+
+  <!-- 5. TÓRAX (Escuto Cinza-Metálico com Cerdas e Vittae de Mosca) -->
+  <g id="thorax">
+    <!-- Macroquetas / Cerdas Sensoriais Rígidas -->
+    <g fill="#090d13">
+      <rect x="23" y="16" width="1" height="2"/>
+      <rect x="26" y="16" width="1" height="2"/>
+      <rect x="29" y="17" width="1" height="2"/>
+    </g>
+    <!-- Base Sólida do Tórax -->
+    <g fill="#171e27">
+      <rect x="22" y="18" width="8" height="8"/>
+      <rect x="23" y="26" width="6" height="1"/>
+      <rect x="21" y="20" width="1" height="5"/>
+      <rect x="30" y="19" width="1" height="6"/>
+    </g>
+    <!-- Faixas Torácicas (Vittae) Típicas de Moscas (Musca / Sarcophaga) -->
+    <g fill="#2c3746">
+      <rect x="23" y="19" width="7" height="6"/>
+      <rect x="22" y="21" width="1" height="3"/>
+    </g>
+    <!-- Destaque Cinza-Prata Dorsal -->
+    <g fill="#506175">
+      <rect x="23" y="18" width="6" height="2"/>
+      <rect x="22" y="19" width="3" height="2"/>
+      <rect x="27" y="20" width="2" height="2"/>
+    </g>
+    <!-- Brilho Especular de Carapaça Metálica -->
+    <g fill="#9cb0c7">
+      <rect x="24" y="18" width="3" height="1"/>
+      <rect x="23" y="19" width="1" height="1"/>
+    </g>
+    <rect x="25" y="18" width="1" height="1" fill="#e2edf7"/>
+    <!-- Escutelo Posterior -->
+    <g fill="#3a495c">
+      <rect x="28" y="21" width="2" height="3"/>
+      <rect x="29" y="22" width="1" height="1" fill="#7589a1"/>
+    </g>
+  </g>
+
+  <!-- 6. CABEÇA, OLHOS DE RUBI E PEÇAS BUCAIS -->
+  <g id="head">
+    <!-- Antenas & Aristas Bífidas Sensoriais -->
+    <g fill="#0e131a">
+      <rect x="15" y="20" width="1" height="2"/>
+      <rect x="14" y="19" width="1" height="2"/>
+      <rect x="13" y="18" width="1" height="2"/>
+      <rect x="15" y="18" width="1" height="1"/>
+      <rect x="12" y="18" width="1" height="1"/>
+    </g>
+
+    <!-- Olho Esquerdo (Fundo, perfil lateral - Rubi Profundo) -->
+    <g id="eye-far">
+      <rect x="13" y="21" width="4" height="4" fill="#4d0515"/>
+      <rect x="12" y="22" width="1" height="3" fill="#29020a"/>
+      <rect x="14" y="21" width="2" height="3" fill="#8f0f2a"/>
+      <rect x="14" y="21" width="1" height="1" fill="#e8274d"/>
+    </g>
+
+    <!-- Fronte Central de Quitina Escura -->
+    <g fill="#2c3746">
+      <rect x="16" y="21" width="3" height="5"/>
+      <rect x="17" y="20" width="2" height="1"/>
+    </g>
+
+    <!-- Ocelos & Conectoma Sináptico (FlyWire Tribute) -->
+    <g id="ocelli-connectome">
+      <rect x="17" y="19" width="1" height="1" fill="#24030a"/>
+      <!-- Spark Elétrico Neural que se destaca na carapaça escura -->
+      <rect x="18" y="19" width="1" height="1" fill="#3df2ff"/>
+      <rect x="17" y="20" width="1" height="1" fill="#baffff"/>
+    </g>
+
+    <!-- Olho Direito (Principal, frontal, volumoso, facetado em carmim/rubi) -->
+    <g id="eye-near">
+      <!-- Borda de Sombra em Vinho Profundo -->
+      <g fill="#2e030c">
+        <rect x="19" y="20" width="5" height="1"/>
+        <rect x="24" y="21" width="2" height="5"/>
+        <rect x="18" y="26" width="6" height="1"/>
+        <rect x="23" y="26" width="2" height="1"/>
+      </g>
+      <!-- Massa Vermelha de Rubi Clássica de Mosca -->
+      <g fill="#990f2d">
+        <rect x="19" y="21" width="5" height="5"/>
+        <rect x="18" y="22" width="1" height="4"/>
+        <rect x="20" y="26" width="3" height="1"/>
+      </g>
+      <!-- Facetas Omatídeas em Vermelho Vibrante -->
+      <g fill="#db1c44">
+        <rect x="19" y="22" width="1" height="1"/>
+        <rect x="21" y="22" width="1" height="1"/>
+        <rect x="23" y="22" width="1" height="1"/>
+        <rect x="20" y="23" width="1" height="1"/>
+        <rect x="22" y="23" width="1" height="1"/>
+        <rect x="19" y="24" width="1" height="1"/>
+        <rect x="21" y="24" width="1" height="1"/>
+        <rect x="23" y="24" width="1" height="1"/>
+        <rect x="20" y="25" width="1" height="1"/>
+        <rect x="22" y="25" width="1" height="1"/>
+      </g>
+      <!-- Brilho Especular Vivo -->
+      <g fill="#ff708f">
+        <rect x="19" y="21" width="2" height="1"/>
+        <rect x="19" y="22" width="1" height="1"/>
+      </g>
+      <rect x="20" y="21" width="1" height="1" fill="#ffffff"/>
+    </g>
+
+    <!-- Probóscide / Tromba Esponjadora Articulada -->
+    <g id="proboscis">
+      <!-- Haustelo / Haste Escura -->
+      <g fill="#171e27">
+        <rect x="16" y="26" width="2" height="2"/>
+        <rect x="15" y="28" width="2" height="2"/>
+        <rect x="14" y="30" width="2" height="2"/>
+      </g>
+      <!-- Realce de Quitina -->
+      <g fill="#3b4859">
+        <rect x="17" y="27" width="1" height="1"/>
+        <rect x="16" y="29" width="1" height="1"/>
+        <rect x="15" y="31" width="1" height="1"/>
+      </g>
+      <!-- Almofada Esponjadora do Lábelo -->
+      <g fill="#0e131a">
+        <rect x="13" y="32" width="4" height="2"/>
+      </g>
+      <g fill="#57697e">
+        <rect x="14" y="32" width="2" height="1"/>
+        <rect x="13" y="33" width="1" height="1"/>
+      </g>
+      <rect x="16" y="33" width="1" height="1" fill="#8ca0b8"/>
+    </g>
+  </g>
+
+  <!-- 7. PATAS ANTERIORES / PROXIMAIS (Articuladas em Chumbo/Grafite) -->
+  <g id="legs-near">
+    <!-- Pata Anterior Direita -->
+    <g id="leg-front-right">
+      <!-- Fêmur -->
+      <rect x="21" y="26" width="1" height="2" fill="#2c3746"/>
+      <rect x="22" y="28" width="1" height="2" fill="#445469"/>
+      <rect x="23" y="29" width="1" height="1" fill="#75889e"/> <!-- Joelho -->
+      <!-- Tíbia -->
+      <rect x="22" y="30" width="1" height="2" fill="#2c3746"/>
+      <rect x="23" y="32" width="1" height="2" fill="#171e27"/>
+      <!-- Tarso -->
+      <rect x="24" y="34" width="1" height="2" fill="#0e131a"/>
+      <rect x="25" y="36" width="1" height="2" fill="#080b0f"/>
+      <rect x="26" y="37" width="1" height="1" fill="#171e27"/>
+    </g>
+
+    <!-- Pata Média Direita -->
+    <g id="leg-mid-right">
+      <!-- Fêmur arqueado em perspectiva -->
+      <rect x="26" y="26" width="2" height="1" fill="#354254"/>
+      <rect x="28" y="27" width="2" height="1" fill="#506175"/>
+      <rect x="30" y="28" width="1" height="1" fill="#8aa0ba"/> <!-- Articulação -->
+      <!-- Tíbia descendo -->
+      <rect x="30" y="29" width="1" height="3" fill="#2c3746"/>
+      <rect x="31" y="32" width="1" height="3" fill="#171e27"/>
+      <!-- Tarso -->
+      <rect x="32" y="35" width="1" height="3" fill="#0e131a"/>
+      <rect x="33" y="38" width="2" height="1" fill="#080b0f"/>
+    </g>
+
+    <!-- Pata Traseira Direita (Pata Longa Estabilizadora) -->
+    <g id="leg-hind-right">
+      <!-- Grande Fêmur articulado -->
+      <rect x="30" y="25" width="2" height="1" fill="#2c3746"/>
+      <rect x="32" y="24" width="2" height="1" fill="#3d4e63"/>
+      <rect x="34" y="23" width="2" height="1" fill="#5b6e85"/>
+      <rect x="36" y="23" width="1" height="1" fill="#93a9c2"/> <!-- Joelho Elevado -->
+      <!-- Longa Tíbia -->
+      <rect x="37" y="24" width="1" height="2" fill="#354254"/>
+      <rect x="38" y="26" width="1" height="3" fill="#1f2834"/>
+      <rect x="39" y="29" width="1" height="3" fill="#0e131a"/>
+      <!-- Tarso tocando o plano do chão -->
+      <rect x="40" y="32" width="1" height="3" fill="#080b0f"/>
+      <rect x="41" y="35" width="1" height="2" fill="#080b0f"/>
+    </g>
+  </g>
+
+  <!-- 8. ASA PROXIMAL (Translúcida com Nervuras Clássicas sobre o Corpo) -->
+  <g id="wing-near">
+    <!-- Membrana Vítrea Transparente -->
+    <g fill="#bfe5f5" opacity="0.42">
+      <rect x="27" y="14" width="12" height="1"/>
+      <rect x="26" y="15" width="15" height="1"/>
+      <rect x="26" y="16" width="16" height="1"/>
+      <rect x="26" y="17" width="17" height="1"/>
+      <rect x="27" y="18" width="16" height="1"/>
+      <rect x="27" y="19" width="15" height="1"/>
+      <rect x="28" y="20" width="12" height="1"/>
+      <rect x="29" y="21" width="8" height="1"/>
+    </g>
+
+    <!-- Nervuras Anatômicas (Venações L1 a L5 e Cross-veins) -->
+    <g fill="#27485c" opacity="0.82">
+      <!-- Borda Costal Superior -->
+      <rect x="27" y="13" width="7" height="1"/>
+      <rect x="34" y="14" width="6" height="1"/>
+      <rect x="40" y="15" width="3" height="1"/>
+      <rect x="43" y="16" width="1" height="2"/>
+      <rect x="42" y="18" width="1" height="1"/>
+      <!-- Nervura Radial -->
+      <rect x="28" y="15" width="9" height="1"/>
+      <rect x="37" y="16" width="5" height="1"/>
+      <!-- Nervura Medial -->
+      <rect x="29" y="17" width="7" height="1"/>
+      <rect x="36" y="18" width="5" height="1"/>
+      <!-- Cross-veins (Nervuras Cruzadas de Dípteros) -->
+      <rect x="33" y="16" width="1" height="1"/>
+      <rect x="38" y="17" width="1" height="1"/>
+      <rect x="32" y="19" width="4" height="1"/>
+    </g>
+
+    <!-- Reflexo de Luz Especular Vítreo -->
+    <g fill="#ffffff" opacity="0.9">
+      <rect x="28" y="13" width="5" height="1"/>
+      <rect x="35" y="14" width="4" height="1"/>
+      <rect x="41" y="15" width="2" height="1"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+__pycache__/
+build/
+models/*.json
+reports/*.json
+reports/*.log
+.venv/
+*.csv.gz
+*.zip
+*.csv/
+
