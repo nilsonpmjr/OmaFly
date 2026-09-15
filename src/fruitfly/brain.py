@@ -6,6 +6,7 @@ The rate cell weights below are designed, not measured Drosophila physiology.
 import math
 import random
 from .core import Circuit
+from .shelter_network import ShelterNetwork
 
 
 class Brain:
@@ -26,8 +27,9 @@ class Brain:
         self.last_cursor=None
         self.fraction_ms=0.
         self.gf_rate=0.
+        self.shelter_network=ShelterNetwork()
 
-    def step(self,x,y,angle,cursor,bounds,effort,dt):
+    def step(self,x,y,angle,cursor,bounds,effort,dt,entries=(),attached=None,exposure=1.):
         dx,dy=cursor[0]-x,cursor[1]-y
         distance=max(1.,math.hypot(dx,dy))
         bearing=math.atan2(dy,dx)-angle
@@ -39,7 +41,7 @@ class Brain:
         self.last_cursor=cursor
         angular=2*math.atan2(18.,distance)
         expansion=min(1.,radial/(distance+40.))
-        stimulus=min(1.,angular*.7+expansion*.5)
+        stimulus=min(1.,angular*.7+expansion*.5)*(.1+.9*exposure)
         currents=[0.]*self.circuit.n
         for i in self.inputs:
             side=self.circuit.neurons[i].get("side")
@@ -69,8 +71,9 @@ class Brain:
         for i in range(7):
             target=math.tanh(drive[i]) if i>=5 else max(0.,min(1.,drive[i]))
             self.state[i]+=(target-self.state[i])*(-math.expm1(-dt/self.tau[i]))
-        return {"speed":max(0.,self.state[0]-.10)*75+self.state[1]*300,
+        base={"speed":max(0.,self.state[0]-.10)*75+self.state[1]*300,
                 "yaw":(self.state[3]-self.state[2])*5,
                 "flight":self.state[1],"gf_hz":self.gf_rate}
+        return self.shelter_network.step(x,y,angle,entries,attached,danger,dt,base)
 
     def close(self):self.circuit.close()

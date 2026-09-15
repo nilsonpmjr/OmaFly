@@ -19,6 +19,8 @@ class WorkerTests(unittest.TestCase):
             path=Path(directory)/"hypr/test";path.mkdir(parents=True)
             server=socket.socket(socket.AF_UNIX);server.bind(str(path/".socket.sock"));server.listen()
             server.settimeout(.05);queries=[];stop=threading.Event()
+            events=socket.socket(socket.AF_UNIX);events.bind(str(path/".socket2.sock"));events.listen();events.settimeout(2)
+            event_clients=[]
             def serve():
                 while not stop.is_set():
                     try:conn,_=server.accept()
@@ -27,6 +29,7 @@ class WorkerTests(unittest.TestCase):
                         command=conn.recv(1024).decode();queries.append(command)
                         payload=[{"name":"fake","x":-1200,"y":0,"width":1200,"height":800,
                                   "scale":1,"focused":True}] if command=="j/monitors" else {"x":-100,"y":100}
+                        if command=="j/clients":payload=[]
                         conn.sendall(json.dumps(payload).encode())
             thread=threading.Thread(target=serve);thread.start()
             env=dict(os.environ,PYTHONPATH=str(ROOT/"src"),XDG_RUNTIME_DIR=directory,HYPRLAND_INSTANCE_SIGNATURE="test")
@@ -52,16 +55,22 @@ class WorkerTests(unittest.TestCase):
             try:
                 time.sleep(.12);self.assertEqual(queries,[])
                 send("enable");frame=receive("frame")
+                stream,_=events.accept();event_clients.append(stream);stream.settimeout(.3)
                 self.assertEqual(frame["monitor"],"fake");self.assertLess(frame["x"],0)
                 send("disable");state=receive("state");count=len(queries)
+                self.assertFalse(state["window_events"])
+                self.assertEqual(stream.recv(1),b"")
                 time.sleep(.2);self.assertEqual(len(queries),count)
                 send("disable");self.assertEqual(receive("state")["ticks"],state["ticks"])
                 send("enable");self.assertTrue(receive("frame")["visible"])
+                stream,_=events.accept();event_clients.append(stream)
                 send("quit");self.assertEqual(process.wait(timeout=2),0)
             finally:
                 if process.poll() is None:process.kill();process.wait()
                 process.stdin.close();process.stdout.close();process.stderr.close();sel.close()
                 stop.set();thread.join(timeout=1);server.close()
+                for stream in event_clients:stream.close()
+                events.close()
 
 
 if __name__=="__main__":unittest.main()

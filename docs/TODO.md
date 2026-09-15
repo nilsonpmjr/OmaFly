@@ -1,12 +1,14 @@
 # TODO e tickets do FruitFly
 
-Entrega de `/to-tickets`, atualizada em 14 de setembro de 2026. Existe um protótipo de fuga/exploração, ainda sem fechar os critérios completos de M0. A execução está registrada em [IMPLEMENTATION.md](IMPLEMENTATION.md) e [relatório de progresso](../reports/STATUS.md).
+Entrega de `/to-tickets`, atualizada em 15 de setembro de 2026. Existe um protótipo de fuga, exploração e abrigo neural, ainda sem fechar os critérios completos de M0. A execução está registrada em [IMPLEMENTATION.md](IMPLEMENTATION.md) e [relatório de progresso](../reports/STATUS.md).
 
 FF-001, FF-002, FF-003, FF-005, FF-006, FF-008–FF-012, FF-014 e FF-033 têm implementação ou evidência parcial. Permanecem abertos até atenderem a todos os respectivos critérios. O requisito posterior de baixo consumo substitui a GPU obrigatória por comparação de backends e acrescenta F14.
 
-Nesta iteração, FF-006, FF-012, FF-014, FF-019 e FF-026 ganharam evidências adicionais: SVG sugerido integrado, animação ligada ao comando de voo, exploração sem bloqueio nos cantos dos cenários automatizados e ablação no ciclo cérebro–corpo. Com a prova de ocultação, são 17 testes aprovados; esses tickets permanecem abertos para os demais critérios de aceite.
+Nesta iteração, FF-006, FF-012, FF-014, FF-019 e FF-026 ganharam evidências adicionais: SVG sugerido integrado, animação ligada ao comando de voo, exploração sem bloqueio nos cantos dos cenários automatizados e ablação no ciclo cérebro–corpo. Com a integração neural dos abrigos e os limites de desenho, são 27 testes aprovados; esses tickets permanecem abertos para os demais critérios de aceite.
 
 O [PRD](PRD.md) define o resultado e a [especificação](SPEC.md) define os contratos propostos. Os identificadores F e R abaixo apontam para requisitos e respostas do PRD.
+
+Em 15/09, FF-009, FF-013, FF-023, FF-024, FF-026 e FF-034 ganharam implementação/evidência parcial: seleção recorrente de entradas, contato por cruzamento, retorno neural, coleta limitada de janelas, superfície oculta sem envio contínuo de quadros e caminhada em até 10 redesenhos/s. A prova neural passou com janela real; os testes cobrem ablação, quatro bordas, múltiplas janelas e históricos de ameaça distintos. Permanecem abertas a matriz gráfica completa, a calibração e a validação prolongada de energia.
 
 ## Ordem de execução
 
@@ -51,7 +53,7 @@ O número FF-033 foi acrescentado quando o usuário autorizou o uso da GPU; sua 
 
 **Aceite:** ocultação parcial e total, seguida de reaparecimento; mover, redimensionar, fechar e trocar workspace não deixa resíduos. Registrar atraso, limitações de cantos/transparência e regra para janelas sobrepostas. Demonstrar separadamente que a máscara de input não é o mecanismo de recorte visual.
 
-**Progresso de FF-004:** a prova com janela própria passou em oito etapas no compositor real, com comparação pixel a pixel: exposição, recorte parcial/total, movimento, redimensionamento, saída/retorno de workspace e fechamento. O componente está no desenho de produção; a escolha de abrigo permanece apenas roteirizada na prova. Faltam atraso durante arraste e casos de sobreposição/transparência. Evidências em [OCCLUSION.md](../reports/OCCLUSION.md).
+**Progresso de FF-004:** a prova com janela própria passou em oito etapas no compositor real, com comparação pixel a pixel: exposição, recorte parcial/total, movimento, redimensionamento, saída/retorno de workspace e fechamento. O componente está no desenho de produção; a variante original da prova mantém posições roteirizadas. A integração neural atual está descrita em [NEURAL-SHELTER.md](../reports/NEURAL-SHELTER.md). Faltam atraso durante arraste e casos de sobreposição/transparência. Evidências em [OCCLUSION.md](../reports/OCCLUSION.md).
 
 ### FF-005: auditar dados e extrair candidato de fuga
 
@@ -72,6 +74,8 @@ O número FF-033 foi acrescentado quando o usuário autorizou o uso da GPU; sua 
 - [ ] **P0 · M · Dependências: FF-002, FF-003, FF-006 · Requisitos: F14.** Comparar o custo completo dos processos, eliminar trabalho desligado e impedir que ciclos atrasados causem espera ocupada.
 
 **Aceite:** teste prolongado ativo, repouso neural e desligado; orçamento de CPU documentado, nenhuma recuperação em rajada e redução de redesenhos. Medir custo adicional no compositor e em um dispositivo menos potente. O teste curto já confirma suspensão dos contadores e descanso sob atraso simulado; ele não fecha sozinho este ticket.
+
+**Progresso de FF-034 em 15/09:** caminhada limitada a dez redesenhos/s preserva a frequência neural. A rodada final mediu 1,37% de um núcleo, mas a placa inteira passou de cerca de 5 W desligada para 17–18 W ativa, mesmo após o limite visual. Investigar composição/clock e alternativas de apresentação é a próxima prioridade de consumo; não declarar o orçamento energético atendido. Evidências em [NEURAL-SHELTER.md](../reports/NEURAL-SHELTER.md).
 
 ### FF-006: provar controle neural e estratégia de ajuste
 

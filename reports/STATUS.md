@@ -2,13 +2,23 @@
 
 Em 14 de setembro de 2026 foi implementada uma versão experimental com núcleo neural, sprite frontolateral, systray e controle por CLI. Ela roda a partir do checkout e começa desligada. O teste gráfico encerrou sua própria instância ao terminar; nenhum autostart ou arquivo de configuração do Omarchy foi instalado.
 
-## Etapa atual: prova de ocultação
+## Etapa atual: abrigo neural, 15/09
+
+Seleção recorrente de entradas, contato por cruzamento, ocultação e retorno foram integrados ao worker. Passaram **27 testes**, incluindo quatro bordas, duas frequências, múltiplas janelas, geometria alterada, históricos diferentes, ablação seletiva e pausa sem socket de eventos. A prova com uma janela real e cursor sintético completou entrada, ocultação total e reaparecimento. Evidências em [NEURAL-SHELTER.md](NEURAL-SHELTER.md).
+
+A coleta agrupa eventos, faz snapshots de segurança a cada dois segundos e acompanha mudanças/abrigo em até cinco snapshots por segundo. A caminhada usa até dez redesenhos por segundo; o controle neural permanece em até 25 Hz. Ocultação total remove a superfície visível e interrompe quadros repetidos, mantendo a rede ativa.
+
+Na medição final de caminhada exposta: **1,37% de um núcleo**, **185 MiB de PSS**, contadores estáveis ao desligar e socket de eventos fechado. A placa inteira marcou **17–18 W ativa e cerca de 5 W desligada**, diferença também observada na rodada anterior. A limitação de quadros não resolveu o custo gráfico; sua investigação permanece prioritária em FF-034. O teste curto não isola a energia do pet nem valida o pior caso de seleção. `desktop-smoke.json` contém esta rodada; `desktop-before-frame-gate.json` preserva a anterior.
+
+Os critérios completos de FF-023/FF-024 continuam abertos: calibração, contextos mais variados e matriz gráfica. Dez respostas, passagem entre monitores e release empacotado permanecem pendentes.
+
+## Prova geométrica de 14/09 (histórico)
 
 A base de FF-004 foi implementada no renderizador e passou nas oito etapas da prova gráfica com janela própria. O recorte parcial/total e o reaparecimento foram comparados pixel a pixel, incluindo movimento, redimensionamento, saída/retorno do workspace e fechamento. O [relatório de ocultação](OCCLUSION.md) registra as capturas, limitações e reprodução.
 
-São **17 testes automatizados aprovados**, incluindo a exploração corrigida e a ablação no ciclo cérebro–corpo da iteração com o SVG sugerido. O teste normal do aplicativo com o novo componente visual passou: cerca de **1,99% de um núcleo de CPU**, **175 MiB de PSS** e **341 MiB de RSS somada** durante oito segundos ativos. Desligado por três segundos, os contadores permaneceram estáveis e não houve incremento de CPU detectado; PSS de aproximadamente 53 MiB. A placa inteira marcou 26 W tanto ativa como desligada nesta rodada; o valor não isola consumo do pet. `desktop-smoke.json` contém esta medição mais recente.
+São **17 testes automatizados aprovados**, incluindo a exploração corrigida e a ablação no ciclo cérebro–corpo da iteração com o SVG sugerido. O teste normal do aplicativo com o novo componente visual passou: cerca de **1,99% de um núcleo de CPU**, **175 MiB de PSS** e **341 MiB de RSS somada** durante oito segundos ativos. Desligado por três segundos, os contadores permaneceram estáveis e não houve incremento de CPU detectado; PSS de aproximadamente 53 MiB. A placa inteira marcou 26 W tanto ativa como desligada nesta rodada; o valor não isola consumo do pet. Essa é a medição histórica; o JSON atual corresponde à etapa de 15/09.
 
-A escolha e a entrada no abrigo ainda são roteirizadas exclusivamente na ferramenta de prova. O pet normal não consulta janelas nem escolhe abrigo nesta etapa. O próximo trabalho é conectar candidatos geométricos e comandos neurais de entrada/saída, com coleta de eventos limitada por orçamento. FF-004 e FF-013 continuam abertos para integração e casos gráficos ainda não testados.
+Na etapa de 14/09, a escolha de abrigo era roteirizada exclusivamente na prova. A integração neural foi realizada em 15/09, conforme a seção atual acima. FF-004 e FF-013 continuam abertos para integração e casos gráficos ainda não testados.
 
 ## Medições históricas do primeiro protótipo
 
@@ -33,10 +43,10 @@ Os testes numéricos verificam que agrupar subpassos não muda a simulação. Um
 
 O teste gráfico confirmou carregamento do sprite, aquisição do cursor, execução contínua e desligamento sem coleta residual. O processo pode ser encerrado pela CLI ou pelo tray. Os testes do worker usam um compositor simulado e confirmam pausa sem consultas e retomada com memória em RAM.
 
-A primeira iteração passou em 11 testes automatizados; a atual passa em 17. Compilação Python, links dos documentos e dimensões das grades de sprites também foram verificados. O `qmllint` ainda emite avisos sobre tipos dinâmicos do Quickshell (`PanelWindow` e `margins`); a execução real carregou essa interface, sem erro de imagem na rodada final.
+A primeira iteração passou em 11 testes automatizados; a atual passa em 27. Compilação Python, links dos documentos e dimensões das grades de sprites também foram verificados. O `qmllint` ainda emite avisos sobre tipos dinâmicos do Quickshell (`PanelWindow` e `margins`); a execução real carregou essa interface, sem erro de imagem na rodada final.
 
 ## Trabalho restante
 
-M0 continua aberto. Ainda faltam integração neural dos abrigos e demais casos gráficos da oclusão, auditoria de origem/licença dos dados, critérios funcionais mais completos da política e matriz de monitores/foco/fullscreen. A versão 1 também exige as dez respostas na mesma rede, empacotamento do plugin e validação prolongada de consumo.
+M0 continua aberto. Ainda faltam calibração dos abrigos e demais casos gráficos da oclusão, auditoria de origem/licença dos dados, critérios funcionais mais completos da política e matriz de monitores/foco/fullscreen. A versão 1 também exige as dez respostas na mesma rede, empacotamento do plugin e validação prolongada de consumo.
 
 A preferência por baixo consumo foi incorporada ao PRD como F14. Para este recorte, a CPU compilada é o padrão; a GPU permanece como experimento de aceleração. O worker limita trabalho e reserva descanso em dispositivos lentos, podendo reduzir a frequência efetiva em vez de ocupar continuamente um núcleo.

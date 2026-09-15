@@ -123,6 +123,14 @@ O recorte visual do sprite pela janela é calculado no desenho (geometria, clipp
 
 Para a versão 1, a oclusão considera a janela-abrigo selecionada. Pilhas complexas e transparência por pixel exigem uma evolução. Se uma janela entrar na frente do abrigo, a regra conservadora é manter o sprite oculto na região do abrigo até receber geometria confiável; o caso precisa constar da matriz de testes.
 
+### Recorte implementado em 15/09/2026
+
+O runtime usa até oito janelas por monitor/workspace e quatro entradas por janela, com dimensões mínimas de 128 × 128 pixels e espaço alcançável dos dois lados. A rede recorrente de abrigo está em `shelter_network.py`; o contato geométrico em `shelter.py`. Os campos `shelter`, `enter` e `exit` ampliam o comando motor. O sprite só assume o abrigo ao cruzar sua borda frontal de 32 pixels com ativação de entrada acima de 0,5. A posição acompanha a translação da janela; remover sua entrada encerra o contato.
+
+A referência é retangular, sem resolver transparência ou pilhas arbitrárias. O cache agrega eventos do socket2, faz atualização de segurança a cada dois segundos e limita acompanhamento/mudanças a cinco snapshots por segundo. Cada snapshot lê janelas e monitores. `FrameGate` limita caminhada a 10 Hz e voo a 25 Hz, com prioridade para mudanças de visibilidade e fase motora, preservando a frequência neural. Ocultação total retira a superfície visível e suspende snapshots repetidos. A supervisão recebe telemetria aproximadamente uma vez por segundo, inclusive em repouso.
+
+Esta implementação inicial não fecha os demais contratos propostos de treino, dez respostas, aceleração corporal, passagem entre monitores e validação energética. Evidências em [NEURAL-SHELTER.md](../reports/NEURAL-SHELTER.md).
+
 ## Contratos de execução e IPC
 
 Usar socket Unix dentro de `$XDG_RUNTIME_DIR`, mensagens versionadas e limitadas em tamanho. O supervisor possui a instância; execuções adicionais enviam comando para ela. Controle tem prioridade sobre telemetria. A simulação deve continuar testável como biblioteca sem D-Bus, Quickshell ou sessão gráfica.

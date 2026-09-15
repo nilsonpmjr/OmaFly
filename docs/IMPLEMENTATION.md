@@ -12,11 +12,17 @@ A exploração anterior perdia a oscilação e podia ficar presa em cantos com c
 
 `tests/test_behavior.py` verifica exploração em janelas sucessivas de 30 segundos, durante três minutos simulados por cenário, com duas sementes/frequências e partidas no centro e em cantos. Também compara a mesma cena com e sem entradas da fibra gigante: a ablação elimina o comando de voo. Isso demonstra influência causal no protótipo, sem validar biologicamente seus parâmetros. `./run.sh status` expõe modo corporal, velocidade, giro, ativação de voo e taxa da fibra gigante na telemetria já existente.
 
-## Base de ocultação por janela
+## Abrigos neurais
 
-O desenho aceita agora uma lista `clips` de até quatro retângulos locais. Ausência desse campo mantém a mosca exposta; uma lista vazia oculta o desenho inteiro. `occlusion.py` calcula a geometria a partir de um abrigo explícito, e `FlySprite.qml` aplica o recorte separado da máscara de input. O worker normal ainda não seleciona abrigos nem consulta janelas.
+O worker agora recebe geometria de janelas e integra seleção neural, cruzamento de entrada, ocultação e retorno. Há até oito janelas e quatro entradas por janela, com IDs estáveis. A rede construída em `shelter_network.py` recebe a atividade da fibra gigante e os sensores geométricos; seus pesos e constantes de tempo são parâmetros de engenharia.
 
-A prova `python tools/probe_occlusion.py` abre e manipula somente uma janela própria, usa o componente visual de produção e encerra sua instância temporária ao terminar. Oito etapas passaram com comparação de alfa pixel a pixel, incluindo movimento, redimensionamento, mudança de workspace e fechamento. As posições dessa prova são roteirizadas; a seleção e a entrada neural serão integradas depois. Resultados e limites estão em [OCCLUSION.md](../reports/OCCLUSION.md).
+O contato exige comando neural e cruzamento físico da borda frontal do sprite. Mover a janela desloca o corpo junto; fechar ou retirar a janela do workspace encerra o contato. A exposição sensorial diminui com o recorte. O retorno depende do estado neural, sem prazo externo de saída.
+
+A coleta agrupa eventos e usa snapshots de segurança a cada dois segundos, chegando a cinco por segundo ao acompanhar abrigo ou mudanças. Cada snapshot consulta monitores e janelas. Desligar fecha o socket de eventos e suspende toda a coleta. A rede mantém até 25 ciclos de controle por segundo em movimento; a caminhada é desenhada em até 10 Hz e o voo em até 25 Hz. Quando totalmente oculta, a superfície some e novos quadros são suspensos até a visibilidade mudar, com a rede ainda ativa.
+
+Para experimentar, deixe uma borda de janela acessível e acompanhe a mosca com o cursor. Fullscreen pode não oferecer entradas. `./run.sh status` mostra `shelter_candidates`, `sheltered`, `exposure`, `threat_memory`, `window_refreshes` e `window_events`.
+
+A prova `python tools/probe_occlusion.py --neural` executa o ciclo em uma janela real pertencente ao teste, com um cursor sintético que não move o ponteiro do usuário. A variante sem `--neural` preserva a prova geométrica anterior. As duas encerram seus próprios processos. Resultados, limitações e evidência de ablação estão em [NEURAL-SHELTER.md](../reports/NEURAL-SHELTER.md).
 
 ## Mudança de prioridade
 
@@ -91,6 +97,6 @@ O alvo `gfx1102` é específico da máquina inspecionada; outros dispositivos ex
 
 As saídas dos cinco neurônios sem neurotransmissor definido têm eficácia zero, com a anatomia preservada no manifesto. O modelo assume sinais simplificados para os demais neurotransmissores, campos receptivos sintéticos e dinâmica LIF normalizada. Essas hipóteses não foram calibradas contra comportamento biológico.
 
-Ainda faltam os dez comportamentos completos, integração neural da oclusão por janelas, persistência entre execuções, reconexão ao tray após falha do host, suspensão por bloqueio da sessão e migração entre monitores sem contenção na borda. Os estados de erro são visíveis no tooltip e na CLI. Esta versão não deve ser instalada como serviço permanente até esses casos serem verificados.
+Ainda faltam os dez comportamentos completos, validação ampla dos abrigos, persistência entre execuções, reconexão ao tray após falha do host, suspensão por bloqueio da sessão e migração entre monitores sem contenção na borda. Os estados de erro são visíveis no tooltip e na CLI. Esta versão não deve ser instalada como serviço permanente até esses casos serem verificados.
 
 Os relatórios JSON em `reports/` guardam medições reproduzíveis. RSS soma páginas compartilhadas entre processos; PSS, quando disponível, ajuda a estimar o custo efetivo. As amostras de potência são da placa inteira, também usada pelo desktop e por outros aplicativos. Elas não permitem atribuir uma diferença de watts exclusivamente à mosca.
